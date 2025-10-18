@@ -4,7 +4,7 @@ import math
 
 
 def funcion(x):
-    return x ** 2
+    return -(x-3)**2 + 10
 
 
 def generar_vecino(x_actual, rango, paso=0.1):
@@ -119,4 +119,5 @@ if __name__ == "__main__":
     plt.title("Iterated Local Search - Trayectoria Punto por Punto")
     plt.legend()
     plt.grid(True, alpha=0.3)
+
     plt.show()
