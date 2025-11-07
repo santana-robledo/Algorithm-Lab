@@ -89,7 +89,6 @@ class Algoritmo_genetico():
         mejor_fit = float('inf') if self.minimizar else -float('inf')
         historial = []
 
-        # --- Activamos modo interactivo para animación ---
         plt.ion()
         fig, ax = plt.subplots()
 
@@ -113,7 +112,10 @@ class Algoritmo_genetico():
 
             historial.append(mejor_fit)
 
-            # --- Animar curva L ---
+            # === NUEVO: imprimir el progreso por iteración ===
+            print(f"Iteración {iter + 1}: Mejor fitness = {mejor_fit:.6f}, Mejor solución = {mejor_sol}")
+
+            # --- Animar curva ---
             ax.cla()
             ax.plot(historial, color='blue', linewidth=2)
             ax.set_title(f'Iteración {iter + 1}/{self.max_iter}')
@@ -128,6 +130,7 @@ class Algoritmo_genetico():
         return mejor_sol, mejor_fit, historial
 
 
+# === Función objetivo ===
 def esfera(x):
     return np.sum(x ** 2)
 
@@ -137,5 +140,5 @@ ag = Algoritmo_genetico(esfera, dimension=2, limites=[-5, 5],
 
 mejor_sol, mejor_fit, historial = ag.ejecutar()
 
-print("Mejor solución encontrada:", mejor_sol)
+print("\nMejor solución final encontrada:", mejor_sol)
 print("Mejor valor de la función:", mejor_fit)
