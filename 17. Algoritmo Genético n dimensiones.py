@@ -127,15 +127,20 @@ class Algoritmo_genetico():
 
         return mejor_sol, mejor_fit, historial
 
-def esfera(x):
-    return np.sum(x ** 2)
+def funcion(x):
+    x = np.array(x)
+    n = len(x)
+    total = 0
+    for i in range(1, n + 1):
+        suma_parcial = np.sum(x[:i])
+        total += suma_parcial ** 2
+    return total
 
-ag = Algoritmo_genetico(esfera, dimension=2, limites=[-5, 5],
+ag = Algoritmo_genetico(funcion, dimension=2, limites=[-5, 5],
                         num_bits=10, max_iter=50, tam_poblacion=20,
-                        prob_cruza=0.8, prob_mutacion=0.02, minimizar=True)
+                        prob_cruza=0.8, prob_mutacion=0.02, minimizar=False)
 
 mejor_sol, mejor_fit, historial = ag.ejecutar()
 
 print("\nMejor solución final encontrada:", mejor_sol)
 print("Mejor valor de la función:", mejor_fit)
-
