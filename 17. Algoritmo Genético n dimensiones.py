@@ -17,8 +17,12 @@ class Algoritmo_genetico():
         self.porc_ruleta = porc_ruleta
         self.porc_torneo = porc_torneo
 
-    def inicializar_poblacion(self):
-        return np.random.randint(0, 2, (self.tam_poblacion, self.dimension * self.num_bits))
+    def evaluar_poblacion(self, poblacion):
+        fitness_ = np.array([self.funcion_objetivo(self.decodificar(ind)) for ind in poblacion])
+        if self.minimizar:
+            fitness = 1 / (1 + fitness_)
+        else:
+            fitness = fitness_
 
     def decodificar(self, individuo):
         valores = []
@@ -144,3 +148,4 @@ mejor_sol, mejor_fit, historial = ag.ejecutar()
 
 print("\nMejor solución final encontrada:", mejor_sol)
 print("Mejor valor de la función:", mejor_fit)
+
